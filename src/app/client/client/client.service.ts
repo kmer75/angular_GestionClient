@@ -62,10 +62,11 @@ export class ClientService implements OnInit {
   }
 
   delete(id: number) {
+    alert('suppression ds le service du client num '+id);
     console.log('id numero : ' + id);
     const url = `${this.clientUrl}/${id}`;
     return this.http.delete(url, { headers: this.headers })
-      .map(() => { console.log('client numero ' + id + ' supprime'); return null; });
+      .map(() => { console.log('client numero ' + id + ' supprime'); });
   }
 
 

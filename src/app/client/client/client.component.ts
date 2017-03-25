@@ -23,8 +23,6 @@ export class ClientComponent implements OnInit {
 
   assignDeletedClient(client: Client) {
     this.selectedClient = client;
-    console.log('assign');
-    console.log(this.selectedClient);
   }
 
 }

@@ -42,7 +42,7 @@ elementRef: ElementRef;
 
 
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+    
   }
 
   // mapClicked($event: MouseEvent) {

@@ -44,12 +44,8 @@ export class ClientListComponent implements OnInit, OnChanges {
 
   clients: Client[] = [];
   @Output() event = new EventEmitter();
-  selectedClient: Client;
 
   onSelect(c: Client) {
-    console.log('on select un client parmi ma liste');
-    console.log(c);
-    this.selectedClient = c;
     this.event.emit(c);
 
   }
@@ -71,19 +67,13 @@ export class ClientListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes) {
     if (changes.clientToDelete && this.clientToDelete != null) {
-      console.log('changement variable client to delete');
-      console.log(this.clientToDelete);
       this.deleteClient(this.clientToDelete);
     }
 
   }
 
   deleteClient(client: Client) {
-
-    console.log('client venant de eventEmittter :')
-    console.log(client);
     this.clients = this.clients.filter(c => c != client);
-
   }
 
   changeState() {
@@ -94,13 +84,11 @@ export class ClientListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.changeState();
-    console.log('state => ' + this.state);
     var that = this;
     this.getClients().subscribe(
       (success) => {
         setTimeout(function () {
           that.changeState();
-          console.log('state => ' + this.state)
         }, 500);
       },
       (fail) => alert('fail')

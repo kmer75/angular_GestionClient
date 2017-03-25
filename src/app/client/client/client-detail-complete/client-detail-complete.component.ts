@@ -54,9 +54,6 @@ export class ClientDetailCompleteComponent implements OnInit {
         })
         .subscribe(client => {
           this.client = client as Client;
-          console.log(client);
-          // this.latitude = client.adresse.latitude;
-          // this.longitude = client.adresse.longitude;
         });
   }
   

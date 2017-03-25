@@ -9,7 +9,6 @@ import { ClientComponent } from './client/client.component';
 import { ClientDashboardComponent } from './client/client-dashboard/client-dashboard.component';
 import { ClientListComponent } from './client/client-list/client-list.component';
 import { ClientDetailComponent } from './client/client-detail/client-detail.component';
-import { ClientEditComponent } from './client/client-edit/client-edit.component';
 import { ClientStartComponent } from './client/client-start/client-start.component';
 import { ClientSaveComponent } from './client/client-save/client-save.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -32,11 +31,14 @@ import { ClientDetailCompleteComponent } from './client/client-detail-complete/c
   providers: [ClientService, ClientSearchService, InMemoryDataService],
 
   declarations: [ClientComponent,
-  MarkerCluster,
+    MarkerCluster,
     ClientDashboardComponent,
     ClientListComponent,
     ClientDetailComponent,
-    ClientEditComponent, ClientStartComponent, ClientSaveComponent, ClientGeolocalisationComponent, ClientDetailCompleteComponent],
+    ClientStartComponent,
+    ClientSaveComponent,
+    ClientGeolocalisationComponent,
+    ClientDetailCompleteComponent],
 
   exports: [ClientComponent]
 })

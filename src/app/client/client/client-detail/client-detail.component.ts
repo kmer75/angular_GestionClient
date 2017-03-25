@@ -70,14 +70,20 @@ export class ClientDetailComponent implements OnInit {
 
   onDelete(client: Client) {
     this.clientService.delete(client.id)
-      .subscribe(() => {
+      .subscribe((success) => {
         this.clientDetail = null;
         this.eventDeletedClient.emit(client);
-        console.log('client ds la methode success du delete (then) :');
-        console.log(client)
+        alert('delete success');
       },
-      ()=>{alert('erreur lors de la suppression')}
+      (error)=>alert('erreur lors de la suppression')
       );
+  }
+
+  ngOnChanges(changes) {
+    if (changes.clientDetail) {
+      alert('changement');
+      console.log(this.clientDetail);
+    }
   }
 
 term : string;
@@ -88,11 +94,15 @@ clients: Observable<Client[]>;
     this.searchTerms.next(term);
   }
 
+  assignNewClientDetail(client: Client) {
+    this.clientDetail = client;
+  }
+
+
   gotoDetail(client: Client): void {
     // let link = ['/client/edit', client.id];
     // this.router.navigate(link);
-    this.clientDetail = client;
-    console.log(client);
+    this.assignNewClientDetail(client);
     this.term = "";
     this.clients = this.searchTerms
       .debounceTime(300)        // wait for 300ms pause in events
@@ -107,6 +117,12 @@ clients: Observable<Client[]>;
         console.log(`Error in component ... ${error}`);
         return Observable.of<Client[]>([]);
       });
+  }
+
+  id : number = 1;
+
+  getClientDetail() {
+    this.clientService.getClient(this.id).subscribe(client=>this.clientDetail=client);
   }
 
 

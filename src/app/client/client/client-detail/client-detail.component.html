@@ -24,6 +24,10 @@
             </div>
         </div>
     </div>
+
+{{id}}
+    <input [(ngModel)]="id" />
+    <button class="btn btn-primary" (click)="getClientDetail()">client detail</button>
    
     <!-- BEGIN Portlet PORTLET-->
     <div class="portlet light"  *ngIf="clientDetail" [@flyInOut]>
