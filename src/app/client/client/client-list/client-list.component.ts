@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { ClientService } from './../client.service';
@@ -38,7 +39,7 @@ import { Client } from './../Client';
 })
 export class ClientListComponent implements OnInit, OnChanges {
 
-  constructor(private clientService: ClientService, private router: Router) { }
+  constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute,) { }
 
 
 
@@ -47,7 +48,7 @@ export class ClientListComponent implements OnInit, OnChanges {
 
   onSelect(c: Client) {
     this.event.emit(c);
-
+    this.router.navigate(['/client/'+c.id])
   }
 
   onAdd() {

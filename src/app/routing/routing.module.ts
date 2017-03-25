@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'client',
     component: ClientComponent,
   },
+  
+  {
+    path: 'client/:id',
+    component: ClientComponent,
+  },
   {
     path: 'client/add', component: ClientSaveComponent
   },

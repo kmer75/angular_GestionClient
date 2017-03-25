@@ -102,7 +102,6 @@ clients: Observable<Client[]>;
   gotoDetail(client: Client): void {
     // let link = ['/client/edit', client.id];
     // this.router.navigate(link);
-    this.assignNewClientDetail(client);
     this.term = "";
     this.clients = this.searchTerms
       .debounceTime(300)        // wait for 300ms pause in events
@@ -123,6 +122,15 @@ clients: Observable<Client[]>;
 
   getClientDetail() {
     this.clientService.getClient(this.id).subscribe(client=>this.clientDetail=client);
+    this.route.params
+        .switchMap((params: any) => {
+          var client = this.clientService.getClient(params['id']);
+          return client;
+        })
+        .subscribe((client) => {
+          this.client = client as Client;
+        });
+    }
   }
 
 
