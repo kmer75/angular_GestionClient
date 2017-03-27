@@ -45,12 +45,9 @@ elementRef: ElementRef;
     console.log(`clicked the marker: ${label || index}`)
   }
 
-  // mapClicked($event: MouseEvent) {
-  //   this.markers.push({
-  //     lat: $event.coords.lat,
-  //     lng: $event.coords.lng
-  //   });
-  // }
+  mapClicked($event: MouseEvent) {
+    //action
+  }
 
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);

@@ -33,7 +33,7 @@
         <tr [@flyInOut] *ngFor="let client of clients" (click)="onSelect(client)">
           <!--<td>{{client.nom}}</td>-->
           <td>{{client.prenom}}</td>
-          <td>{{client.description | slice:0:50 }} {{client.description.length > 50 ? '...' : ''}}</td>
+          <td >{{client.description | slice:0:80 }} {{client.description.length > 80 ? '...' : ''}}</td>
           <td><img style="height: 50px; width: 70px" src="{{client.imgPath}}" /></td>
         </tr>
       </table>

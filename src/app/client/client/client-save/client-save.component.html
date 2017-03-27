@@ -1,4 +1,4 @@
-<div [@routeAnimation]="show">
+<div [@routeAnimation]>
     <div class="m-heading-1 border-blue m-bordered">
         
           <p>Formulaire dynamique, possibilité de voir l'objet s'hydrater en regardant le Json</p>
@@ -22,7 +22,7 @@
                                     <input [ngClass]="{'edited':isEdit}" type="text" class="form-control" id="nom" formControlName="nom" value="test">
                                     <label for="nom">nom</label>
                                     <span *ngIf="formErrors.nom" class="help-block">{{ formErrors.nom }}</span>
-                                    <span *ngIf="clientForm.controls.nom.pristine" class="help-block">{{pristineMessages.nom}}</span>
+                                    <!--<span *ngIf="clientForm.controls.nom.pristine" class="help-block">{{pristineMessages.nom}}</span>-->
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -30,7 +30,7 @@
                                     <input [ngClass]="{'edited':isEdit}" type="text" class="form-control" id="prenom" formControlName="prenom">
                                     <label for="prenom">prenom</label>
                                     <span *ngIf="formErrors.prenom" class="help-block">{{ formErrors.prenom }}</span>
-                                    <span *ngIf="clientForm.controls.prenom.pristine" class="help-block">{{pristineMessages.prenom}}</span>
+                                    <!--<span *ngIf="clientForm.controls.prenom.pristine" class="help-block">{{pristineMessages.prenom}}</span>-->
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                     <input [ngClass]="{'edited':isEdit}" type="text" id="email" class="form-control" formControlName="email">
                                     <label for="email">email</label>
                                     <span *ngIf="formErrors.email" class="help-block">{{ formErrors.email }}</span>
-                                    <span *ngIf="clientForm.controls.email.pristine" class="help-block">{{pristineMessages.email}}</span>
+                                    <!--<span *ngIf="clientForm.controls.email.pristine" class="help-block">{{pristineMessages.email}}</span>-->
                                 </div>
                             </div>
 
@@ -49,7 +49,7 @@
                                     <input [ngClass]="{'edited':isEdit}" type="text" id="description" class="form-control" formControlName="description">
                                     <label for="description">description</label>
                                     <span *ngIf="formErrors.description" class="help-block">{{ formErrors.description }}</span>
-                                    <span *ngIf="clientForm.controls.description.pristine" class="help-block">{{pristineMessages.description}}</span>
+                                    <!--<span *ngIf="clientForm.controls.description.pristine" class="help-block">{{pristineMessages.description}}</span>-->
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                     <input [ngClass]="{'edited':isEdit}" type="text" id="image" class="form-control" formControlName="imgPath">
                                     <label for="image">image</label>
                                     <span *ngIf="formErrors.imgPath" class="help-block">{{ formErrors.imgPath }}</span>
-                                    <span *ngIf="clientForm.controls.imgPath.pristine" class="help-block">{{pristineMessages.imgPath}}</span>
+                                    <!--<span *ngIf="clientForm.controls.imgPath.pristine" class="help-block">{{pristineMessages.imgPath}}</span>-->
                                 </div>
                             </div>
 
@@ -68,19 +68,16 @@
                                     <input [ngClass]="{'edited':isEdit}" type="text" id="telephone" class="form-control" formControlName="telephone">
                                     <label for="telephone">telephone</label>
                                     <span *ngIf="formErrors.telephone" class="help-block">{{ formErrors.telephone }}</span>
-                                    <span *ngIf="clientForm.controls.telephone.pristine" class="help-block">{{pristineMessages.telephone}}</span>
+                                    <!--<span *ngIf="clientForm.controls.telephone.pristine" class="help-block">{{pristineMessages.telephone}}</span>-->
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group form-md-line-input form-md-floating-label edited" [ngClass]="{'has-error': formErrors.adresse, 'has-success': !formErrors.adresse}">
+                                <div class="form-group form-md-line-input form-md-floating-label edited">
                                     <input [ngClass]="{'edited':isEdit}" type="text" id="adresse" class="form-control" formControlName="autocomplete" autocorrect="off"
-                                        autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-
-                                    <span *ngIf="formErrors.adresse" class="help-block">{{ formErrors.autocomplete }}</span>
-                                    <span *ngIf="clientForm.controls.autocomplete.pristine" class="help-block">{{pristineMessages.autocomplete}}</span>
+                                        autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">                                    
                                 </div>
                             </div>
                         </div>
