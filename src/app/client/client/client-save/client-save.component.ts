@@ -26,6 +26,7 @@ declare var jQuery: any;
 })
 export class ClientSaveComponent implements OnInit, AfterViewInit {
 
+
   client: Client = {
     id: null, nom: '', prenom: '', description: '',
     imgPath: '', telephone: '', email: '', genre: '',
@@ -106,6 +107,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     }
   }
 
+
   ngOnInit() {
 
     jQuery(this.elementRef.nativeElement).find('#clickJson').on('click', function () {
@@ -115,7 +117,23 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
       } else {
         jQuery('#json').slideDown(300);
       }
+
     });
+
+    /*
+          var that = this;
+          var $input = jQuery( '.datepicker' ).pickadate({
+              formatSubmit: 'yyyy/mm/dd',
+              // min: [2015, 7, 14],
+              container: '#container',
+              // editable: true,
+              closeOnSelect: false,
+              closeOnClear: false,
+              
+          })
+  
+          var picker = $input.pickadate('picker');
+          */
 
     this.whichForm();
 
@@ -125,7 +143,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     //set google maps defaults
     this.zoom = 5;
     this.latitude = 48.8665906,
-    this.longitude = 2.317465200000015
+      this.longitude = 2.317465200000015
 
     //create search FormControl
     this.searchControl = new FormControl();
