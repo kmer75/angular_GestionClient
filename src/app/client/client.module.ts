@@ -1,21 +1,20 @@
-import { ClientSearchService } from './client/client-search-service';
-import { MarkerCluster } from './client/client-geolocalisation/marker.cluster';
-import { ClientService } from './client/client.service';
-import { InMemoryDataService } from './client/in-memory-data.service';
+import { ClientSearchService } from './services/client-search-service';
+import { ClientService } from './services/client.service';
+import { ClientFirebaseService } from './services/client-firebase.service';
+import { MarkerCluster } from './client-geolocalisation/marker.cluster';
+import { InMemoryDataService } from './services/in-memory-data.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClientComponent } from './client/client.component';
-import { ClientDashboardComponent } from './client/client-dashboard/client-dashboard.component';
-import { ClientListComponent } from './client/client-list/client-list.component';
-import { ClientDetailComponent } from './client/client-detail/client-detail.component';
-import { ClientEditComponent } from './client/client-edit/client-edit.component';
-import { ClientStartComponent } from './client/client-start/client-start.component';
-import { ClientSaveComponent } from './client/client-save/client-save.component';
+import { ClientComponent } from './client.component';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { ClientListComponent } from './client-list/client-list.component';
+import { ClientDetailComponent } from './client-detail/client-detail.component';
+import { ClientSaveComponent } from './client-save/client-save.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgmCoreModule } from 'angular2-google-maps/core';
-import { ClientGeolocalisationComponent } from './client/client-geolocalisation/client-geolocalisation.component';
-import { ClientDetailCompleteComponent } from './client/client-detail-complete/client-detail-complete.component';
+import { ClientGeolocalisationComponent } from './client-geolocalisation/client-geolocalisation.component';
+import { ClientDetailCompleteComponent } from './client-detail-complete/client-detail-complete.component';
 
 
 @NgModule({
@@ -29,14 +28,14 @@ import { ClientDetailCompleteComponent } from './client/client-detail-complete/c
       libraries: ["places"]
     })
   ],
-  providers: [ClientService, ClientSearchService, InMemoryDataService],
+  providers: [ClientService, ClientSearchService, InMemoryDataService, ClientFirebaseService],
 
   declarations: [ClientComponent,
   MarkerCluster,
     ClientDashboardComponent,
     ClientListComponent,
     ClientDetailComponent,
-    ClientEditComponent, ClientStartComponent, ClientSaveComponent, ClientGeolocalisationComponent, ClientDetailCompleteComponent],
+    ClientSaveComponent, ClientGeolocalisationComponent, ClientDetailCompleteComponent],
 
   exports: [ClientComponent]
 })

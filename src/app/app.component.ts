@@ -1,4 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AdminService } from './admin.service';
+import { Component, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Admin } from "app/admin";
 declare var jQuery: any;
 
 @Component({
@@ -10,17 +12,19 @@ export class AppComponent implements OnInit {
   title = 'app works!';
 
   elementRef: ElementRef;
-    constructor(elementRef: ElementRef) {
+    constructor(elementRef: ElementRef, private adminService : AdminService) {
         this.elementRef = elementRef;
     }
 
-     ngOnInit(): void {
-        // console.log("App on init");
-        // jQuery(this.elementRef.nativeElement).ready(function () {
-        //      jQuery(".page-header .menu-toggler").on("click", function(event) {
-            
-        // });
-        // });
+    admin : Admin;
 
+    getAdmin () : Admin{
+      return this.adminService.admin;
     }
+
+     ngOnInit(): void {
+        this.admin = this.getAdmin();
+        //console.log(this.adminService.admin);
+    }
+
 }

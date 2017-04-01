@@ -1,0 +1,87 @@
+<div [@routeAnimation]>
+    <div class="m-heading-1 border-blue m-bordered">
+
+        <p>Formulaire dynamique, possibilité de voir l'objet s'hydrater en regardant le Json</p>
+
+    </div>
+    <div class="col-md-7">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption font-blue">
+
+                    <span class="caption-subject bold uppercase">Formulaire</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+                    <div class="form-body">
+                      
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.nom, 'has-success': !formErrors.nom}">
+                                    <input [ngClass]="{'edited':isEdit}" type="text" class="form-control" id="nom" formControlName="nom">
+                                    <label for="nom">nom</label>
+                                    <span *ngIf="formErrors.nom" class="help-block">{{ formErrors.nom }}</span>
+                                    <span *ngIf="adminForm.controls.nom.pristine" class="help-block">{{pristineMessages.nom}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.prenom, 'has-success': !formErrors.prenom}">
+                                    <input [ngClass]="{'edited':isEdit}" type="text" class="form-control" id="prenom" formControlName="prenom">
+                                    <label for="prenom">prenom</label>
+                                    <span *ngIf="formErrors.prenom" class="help-block">{{ formErrors.prenom }}</span>
+                                    <span *ngIf="adminForm.controls.prenom.pristine" class="help-block">{{pristineMessages.prenom}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.imgPath, 'has-success': !formErrors.imgPath}">
+                                    <input [ngClass]="{'edited':isEdit}" type="text" id="image" class="form-control" formControlName="imgPath">
+                                    <label for="image">image</label>
+                                    <span *ngIf="formErrors.imgPath" class="help-block">{{ formErrors.imgPath }}</span>
+                                    <span *ngIf="adminForm.controls.imgPath.pristine" class="help-block">{{pristineMessages.imgPath}}</span>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="form-actions noborder">
+                        <button type="button" [disabled]="!adminForm.valid || state" type="submit" class="btn blue">Submit</button>
+                        <button type="button" class="btn default" (click)="onCancel()">Cancel</button>
+                        <div *ngIf="state" style="display: inline-block; vertical-align: middle; margin-left: 80px;" class="loader"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption font-green">
+
+                    <span class="caption-subject bold uppercase"> Informations</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <button type="button" id="clickJson" class="btn blue-hoki btn-block">afficher l'objet json</button>
+                <div id="json" style="display:none">
+                    <hr/>
+                    <pre>
+        {{adminForm.value | json}} <br/>validation => {{adminForm.valid}}
+
+    </pre>
+                </div>
+                <hr *ngIf="adminForm.value.imgPath"/>
+                <img style="max-width: 100%" [src]="adminForm.value.imgPath" />
+                
+            </div>
+        </div>
+    </div>
+</div>
