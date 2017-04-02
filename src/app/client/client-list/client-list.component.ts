@@ -60,7 +60,7 @@ export class ClientListComponent implements OnInit, OnChanges {
   }
 
   getClients(): Observable<any> {
-    let response = this.clientService.getClients().share();
+    let response = this.clientFBService.getClients().share();
     response.delay(500).subscribe(
       (data) => { this.clients = data },
       (data) => { alert('error') }
@@ -94,7 +94,6 @@ export class ClientListComponent implements OnInit, OnChanges {
   state: boolean = false;
 
   ngOnInit() {
-    this.clientFBService.getClients();
     this.changeState();
     console.log('state => ' + this.state);
     var that = this;

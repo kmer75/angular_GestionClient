@@ -1,3 +1,4 @@
+import { ClientFirebaseService } from './../services/client-firebase.service';
 import { ClientService } from './../services/client.service';
 import { Component, OnInit, OnChanges, ElementRef } from '@angular/core';
 import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
@@ -15,6 +16,7 @@ export class ClientGeolocalisationComponent implements OnInit {
 elementRef: ElementRef;
   constructor(elementRef: ElementRef,
   private clientService: ClientService,
+  private clientFbService : ClientFirebaseService,
    private router: Router) { this.elementRef = elementRef;}
 
   ngOnInit() {
@@ -26,7 +28,7 @@ elementRef: ElementRef;
 
   clients: Client[] = [];
   getClients(): void {
-    this.clientService.getClients().subscribe(data => {
+    this.clientFbService.getClients().subscribe(data => {
       this.clients = data;
       this.getMarkers(data);
       this.points = data;
@@ -68,7 +70,7 @@ elementRef: ElementRef;
 
   markers: marker[] = [];
 
-  goToDetail(id:number) {
+  goToDetail(id : string) {
     this.router.navigate(['/client/detail', id]);
   }
 

@@ -1,3 +1,4 @@
+import { ClientFirebaseService } from './../services/client-firebase.service';
 import { ClientSearchService } from './../services/client-search-service';
 import { ClientService } from './../services/client.service';
 import { Subject } from 'rxjs/Subject';
@@ -41,6 +42,7 @@ import { Router } from "@angular/router";
 export class ClientDetailComponent implements OnInit {
 
   constructor(private clientService: ClientService,
+  private clientFbService : ClientFirebaseService,
   private clientSearchService: ClientSearchService,
     private route: ActivatedRoute,
     private router: Router) { }
@@ -48,7 +50,6 @@ export class ClientDetailComponent implements OnInit {
   lng: number = 7.809007;
 
   client: Client;
-  identifiant: number;
 
   @Input() clientDetail: Client = null;
 
@@ -60,24 +61,36 @@ export class ClientDetailComponent implements OnInit {
 
   onEdit(client: Client) {
 
-    this.router.navigate(['/client/edit', client.id]);
+    this.router.navigate(['/client/edit', client.$key]);
 
   }
 
   onDetail(client: Client) {
-    this.router.navigate(['/client/detail', client.id]);
+    this.router.navigate(['/client/detail', client.$key]);
   }
 
+  // onDelete(client: Client) {
+  //   this.clientService.delete(client.id)
+  //     .subscribe(() => {
+  //       this.clientDetail = null;
+  //       this.eventDeletedClient.emit(client);
+  //       console.log('client ds la methode success du delete (then) :');
+  //       console.log(client)
+  //     },
+  //     ()=>{alert('erreur lors de la suppression')}
+  //     );
+  // }
+
+  
   onDelete(client: Client) {
-    this.clientService.delete(client.id)
-      .subscribe(() => {
+    this.clientFbService.delete(client.$key)
+      .then(
+      (success) => {
         this.clientDetail = null;
         this.eventDeletedClient.emit(client);
         console.log('client ds la methode success du delete (then) :');
         console.log(client)
-      },
-      ()=>{alert('erreur lors de la suppression')}
-      );
+      });
   }
 
 term : string;

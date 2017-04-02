@@ -24,7 +24,7 @@
 
           <sebm-google-map-info-window>
             <img [src]="m.client.imgPath" style="max-height: 75px" />
-            <strong>{{m.client.prenom}} {{m.client.nom}} : <a (click)="goToDetail(m.client.id)">voir détail</a></strong>
+            <strong>{{m.client.prenom}} {{m.client.nom}} : <a (click)="goToDetail(m.client.$key)">voir détail</a></strong>
           </sebm-google-map-info-window>
 
         </sebm-google-map-marker>

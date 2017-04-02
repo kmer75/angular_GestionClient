@@ -1,9 +1,12 @@
+import { ClientFirebaseService } from './../services/client-firebase.service';
 import { ClientService } from './../services/client.service';
-import { Component, OnInit, trigger,
+import {
+  Component, OnInit, trigger,
   state,
   style,
   transition,
-  animate } from '@angular/core';
+  animate
+} from '@angular/core';
 import { Client } from './../Client';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -20,7 +23,7 @@ import { ActivatedRoute } from "@angular/router";
         style({
           opacity: 0,
           transform: 'translateY(-100%)',
-          'border-bottom' : '#555555 3px solid'
+          'border-bottom': '#555555 3px solid'
         }),
         animate('0.5s ease-in')
       ]),
@@ -36,9 +39,11 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ClientDetailCompleteComponent implements OnInit {
 
-  constructor(private clientService: ClientService, private router: Router,
+  constructor(
+    private clientService: ClientService,
+    private clientFbService: ClientFirebaseService, private router: Router,
     private location: Location,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute, ) { }
 
   ngOnInit() {
     this.getClient();
@@ -48,34 +53,31 @@ export class ClientDetailCompleteComponent implements OnInit {
 
   getClient() {
     this.route.params
-        .switchMap((params: any) => {
-          var client = this.clientService.getClient(params['id']);
-          return client;
-        })
-        .subscribe(client => {
-          this.client = client as Client;
-          console.log(client);
-          // this.latitude = client.adresse.latitude;
-          // this.longitude = client.adresse.longitude;
-        });
+      .switchMap((params: any) => {
+        var client = this.clientFbService.getClient(params['id']);
+        return client;
+      })
+      .subscribe(client => {
+        this.client = client as Client;
+      });
   }
-  
+
   goList() {
     this.router.navigate(['/client'])
   }
 
   onEdit(client: Client) {
-
-    this.router.navigate(['/client/edit', client.id]);
-
+    this.router.navigate(['/client/edit', client.$key]);
   }
 
   onDelete(client: Client) {
-    this.clientService.delete(client.id)
-      .subscribe(() => {
-        this.client = null;
+    this.clientFbService.delete(client.$key)
+      .then(
+      (success) => {
+        alert('success');
         this.router.navigate(['/client']);
       });
   }
+
 
 }

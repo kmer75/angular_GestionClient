@@ -1,6 +1,7 @@
 import {Adresse} from './adresse';
 export class Client {
     constructor(
+        public $key?: string,
         public id?: number,
         public nom?: string,
         public prenom?: string,

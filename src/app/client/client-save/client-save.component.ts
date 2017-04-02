@@ -1,3 +1,4 @@
+import { ClientFirebaseService } from './../services/client-firebase.service';
 import { ClientService } from './../services/client.service';
 import { Animations } from './../../shared/animation';
 import { Router } from '@angular/router';
@@ -28,7 +29,8 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
 
 
   client: Client = {
-    id: null, nom: '', prenom: '', description: '',
+    id : null,
+    nom: '', prenom: '', description: '',
     imgPath: '', telephone: '', email: '', genre: '',
     adresse: {
       rue: "",
@@ -55,6 +57,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
 
   constructor(private formBuilder: FormBuilder,
     private clientService: ClientService,
+    private clientFbService : ClientFirebaseService,
     private router: Router,
     private location: Location,
     private route: ActivatedRoute,
@@ -87,11 +90,18 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
       this.changeState();
       return;
     }
+    
+    console.log('formulaire soumis');
     var clientSaved: Client = this.clientForm.value as Client;
-    this.clientService.save(clientSaved);
+    console.log('go methode save');
+    this.clientFbService.save(clientSaved);
+    console.log('apres methode save');
+    
     var that = this;
     setTimeout(function () {
+      console.log('ds timeout');
       that.changeState();
+      console.log('apres changement etat pour le loader');
       that.router.navigate(['/client']);
     }, 2000);
   }
@@ -109,6 +119,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+
 
     jQuery(this.elementRef.nativeElement).find('#clickJson').on('click', function () {
 
@@ -185,7 +196,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     if (this.isEdit) {
       this.route.params
         .switchMap((params: any) => {
-          var client = this.clientService.getClient(params['id']);
+          var client = this.clientFbService.getClient(params['id']);
           return client;
         })
         .subscribe((client) => {
@@ -201,6 +212,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
   //va maper les element input html avec ces parametre
   buildForm() {
     this.clientForm = this.formBuilder.group({
+      //'$key' : [this.client.$key],
       'id': [this.client.id],
       'nom': [this.client.nom, [Validators.required, Validators.minLength(2)]],
       'prenom': [this.client.prenom, [Validators.required, Validators.minLength(2)]],
@@ -209,7 +221,6 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
       'description': [this.client.description, [Validators.required]],
       'telephone': [this.client.telephone, [Validators.required, Validators.pattern(this.regexTel)]],
       'imgPath': [this.client.imgPath, [Validators.required]],
-      'autocomplete': [''],
       'adresse': this.formBuilder.group({
         'rue': [this.client.adresse.rue, [Validators.required]],
         'zipcode': [this.client.adresse.zipcode, [Validators.required]],
@@ -254,7 +265,6 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     'genre': '',
     'description': '',
     'telephone': '',
-    'autocomplete': '',
     'adresse.rue': '',
     'adresse.zipcode': '',
     'adresse.ville': '',

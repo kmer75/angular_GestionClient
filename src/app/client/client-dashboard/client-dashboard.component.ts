@@ -90,7 +90,7 @@ export class ClientDashboardComponent implements OnInit {
   }
 
   gotoDetail(client: Client): void {
-    let link = ['/client/edit', client.id];
+    let link = ['/client/edit', client.$key];
     this.router.navigate(link);
   }
 
