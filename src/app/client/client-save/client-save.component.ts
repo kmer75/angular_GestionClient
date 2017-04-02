@@ -42,6 +42,8 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     }
   }
 
+  $key : string;
+
   public latitude: number;
   public longitude: number;
 
@@ -83,7 +85,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     this.location.back();
   }
 
-  onSubmit() {
+  onSubmit(key : string) {
     this.state = true;
     if (!this.clientForm.valid) {
       alert("formulaire non valide !");
@@ -94,7 +96,7 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     console.log('formulaire soumis');
     var clientSaved: Client = this.clientForm.value as Client;
     console.log('go methode save');
-    this.clientFbService.save(clientSaved);
+    this.clientFbService.save(key,clientSaved);
     console.log('apres methode save');
     
     var that = this;
@@ -203,7 +205,8 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
           this.client = client as Client;
           this.latitude = client.adresse.latitude;
           this.longitude = client.adresse.longitude;
-          this.buildForm()
+          this.buildForm();
+          this.$key = client.$key;
         });
     }
 

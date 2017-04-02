@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="clientForm" (ngSubmit)="onSubmit($key)">
                     <div class="form-body">
                         
                         <!--<input type="date" formControlName="date" class="form-control" #dateValue  name="date"> 
@@ -29,6 +29,7 @@
                 <input type="text">
 
                 <div id="container"></div>-->
+                <input [hidden]=true type="text" [value]="$key"/>
 
                         <div class="row">
                             <div class="col-md-6">

@@ -28,9 +28,9 @@ getClient(key: string) : Observable<Client> {
     return client$;
   }
 
-  update(client: Client) {
-    let client$ = this.af.database.object('/clients/'+client.$key);
-    client$.update(client).then(()=>
+  update(key:string,client: Client) {
+    let clients$ = this.af.database.list('/clients');
+    clients$.update(key, client).then(()=>
     {
       console.log('update de '+client.prenom);
       return client
@@ -42,22 +42,24 @@ getClient(key: string) : Observable<Client> {
     clients$.push(client).then(()=>console.log('creation de '+ client.prenom)).catch(this.handleError);
   }
 
-  save(client: Client) {
+  save(key:string,client: Client) {
     if (client.id) {
-      return this.update(client);
+      return this.update(key,client);
     }
     client.id = Math.floor((Math.random() * 10000) + 1);
     return this.create(client);
   }
 
-  delete(key: string) : Promise<any>{
-   let client$ = this.af.database.object('/clients/'+key);
-    return client$.remove()
-    .then(()=>console.log('suppression du client numero '+key))
-    .catch(this.handleError) as Promise<any> ;
+  delete(key: string) : Promise<any> {
+  //  let client$ = this.af.database.object('/clients/'+key);
+  //   return client$.remove()
+  //   .then(()=>console.log('suppression du client numero '+key))
+  //   .catch(this.handleError) as Promise<any> ;
     //ou
-    // let clients$ = this.af.database.list('/clients');
-    // clients$.remove(''+id).then(_ => console.log('item deleted!'))
+
+     let clients$ = this.af.database.list('/clients');
+     return clients$.remove(key).then(()=>console.log('suppression du client numero '+key))
+    .catch(this.handleError) as Promise<any> ;
   }
 
 
