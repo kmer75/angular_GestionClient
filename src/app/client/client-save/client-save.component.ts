@@ -339,6 +339,41 @@ export class ClientSaveComponent implements OnInit, AfterViewInit {
     return '';
   }
 
+    getZipcode(): string {
+    if (this.autocomplete && this.autocomplete.getPlace() && this.autocomplete.getPlace().address_components) {
+      return this.autocomplete.getPlace().address_components[6].long_name;
+    }
+    return '';
+  }
+
+    getVille(): string {
+    if (this.autocomplete && this.autocomplete.getPlace() && this.autocomplete.getPlace().address_components) {
+      return this.autocomplete.getPlace().address_components[2].long_name;
+    }
+    return '';
+  }
+
+    getPays(): string {
+    if (this.autocomplete && this.autocomplete.getPlace() && this.autocomplete.getPlace().address_components) {
+      return this.autocomplete.getPlace().address_components[5].long_name;
+    }
+    return '';
+  }
+
+    getLat(): string {
+    if (this.autocomplete && this.autocomplete.getPlace() && this.autocomplete.getPlace().geometry) {
+      return this.autocomplete.getPlace().geometry.location.lat();
+    }
+    return '';
+  }
+
+    getLng(): string {
+    if (this.autocomplete && this.autocomplete.getPlace() && this.autocomplete.getPlace().geometry) {
+      return this.autocomplete.getPlace().geometry.location.lng();
+    }
+    return '';
+  }
+
 
   //methode google map pour recuperer different champs de l'adresse
   fillInAddress(place) {

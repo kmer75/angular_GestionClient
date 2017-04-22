@@ -1,37 +1,36 @@
-
-
-
 <div class="col-md-6">
-     <div class="search-page search-content-1">
+    <div class="search-page search-content-1">
         <div class="search-bar">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="m-heading-1 border-red clearfix">FireBase n'accepte pas les recherches type 'Like', il faut écrire le prénom complet</div>
                     <div class="input-group">
-                        <input [(ngModel)]="term" id="search-box" (keyup)="search(term)" type="text" class="form-control" placeholder="Search for...">
+                        
+                        <input [(ngModel)]="term" id="search-box" (keyup)="search(term)" type="text" class="form-control" placeholder="Rechercher un client">
                         <span class="input-group-btn">
-                      <button class="btn blue uppercase bold" type="button">Search</button>
+                      <button class="btn blue uppercase bold" type="button">Rechercher</button>
                     </span>
                     </div>
                     <hr/>
                     <table class="table table-hover">
                         <tr class="m-heading-1 border-green clearfix" *ngFor="let client of clients | async" (click)="gotoDetail(client)">
                             <td>{{client.nom}} {{client.prenom}}</td>
-                            <td><img width="60px" [src]="client.imgPath"/></td>
+                            <td><img width="60px" [src]="client.imgPath" /></td>
                         </tr>
                     </table>
                 </div>
-                
+
             </div>
         </div>
     </div>
-   
+
     <!-- BEGIN Portlet PORTLET-->
-    <div class="portlet light"  *ngIf="clientDetail" [@flyInOut]>
+    <div class="portlet light" *ngIf="clientDetail" [@flyInOut]>
         <div class="portlet-title row">
             <div class="caption col-xs-12">
 
                 <span class="caption-subject bold font-grey-gallery uppercase col-xs-9">{{clientDetail?.prenom}} {{clientDetail?.nom}}</span>
-                
+
                 <span class="col-xs-3">
                     <button class="btn green" (click)="onDetail(clientDetail)">Detail</button>
                 </span>
@@ -47,7 +46,7 @@
 
                 <div class="col-sm-6">
                     <div class="mt-element-list">
-                        
+
                         <div class="mt-list-container list-simple ext-1">
                             <ul>
 

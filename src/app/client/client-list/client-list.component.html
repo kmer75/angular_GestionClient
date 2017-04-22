@@ -30,7 +30,7 @@
           <th>portrait</th>
         </tr>
         </thead>
-        <tr [@flyInOut] *ngFor="let client of clients" (click)="onSelect(client)">
+        <tr class="m-heading-1" [ngClass]="{'border-green':idx % 2 == 0, 'border-green-sharp':idx % 2 != 0}"  [@flyInOut] *ngFor="let client of clients; let idx = index" (click)="onSelect(client)">
           <!--<td>{{client.nom}}</td>-->
           <td>{{client.prenom}}</td>
           <td >{{client.description | slice:0:80 }} {{client.description.length > 80 ? '...' : ''}}</td>

@@ -15,7 +15,7 @@
             <div class="portlet-body form">
                 <form [formGroup]="clientForm" (ngSubmit)="onSubmit($key)">
                     <div class="form-body">
-                        
+
                         <!--<input type="date" formControlName="date" class="form-control" #dateValue  name="date"> 
                         {{dateValue.value}}
                         <input formControlName="date"
@@ -29,7 +29,7 @@
                 <input type="text">
 
                 <div id="container"></div>-->
-                <input [hidden]=true type="text" [value]="$key"/>
+                        <input [hidden]=true type="text" [value]="$key" />
 
                         <div class="row">
                             <div class="col-md-6">
@@ -50,18 +50,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.email, 'has-success': !formErrors.email}">
-                                    <input [ngClass]="{'edited':isEdit}" type="text" id="email" class="form-control" formControlName="email">
-                                    <label for="email">email</label>
-                                    <span *ngIf="formErrors.email" class="help-block">{{ formErrors.email }}</span>
-                                    <span *ngIf="clientForm.controls.email.pristine" class="help-block">{{pristineMessages.email}}</span>
+                            <div class="col-md-12">
+                                <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.imgPath, 'has-success': !formErrors.imgPath}">
+                                    <input [ngClass]="{'edited':isEdit}" type="text" id="image" class="form-control" formControlName="imgPath">
+                                    <label for="image">image</label>
+                                    <span *ngIf="formErrors.imgPath" class="help-block">{{ formErrors.imgPath }}</span>
+                                    <span *ngIf="clientForm.controls.imgPath.pristine" class="help-block">{{pristineMessages.imgPath}}</span>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.description, 'has-success': !formErrors.description}">
-                                    <input [ngClass]="{'edited':isEdit}" type="text" id="description" class="form-control" formControlName="description">
+                                    <textarea [ngClass]="{'edited':isEdit}" type="text" id="description" class="form-control" formControlName="description"></textarea>
                                     <label for="description">description</label>
                                     <span *ngIf="formErrors.description" class="help-block">{{ formErrors.description }}</span>
                                     <span *ngIf="clientForm.controls.description.pristine" class="help-block">{{pristineMessages.description}}</span>
@@ -70,11 +72,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.imgPath, 'has-success': !formErrors.imgPath}">
-                                    <input [ngClass]="{'edited':isEdit}" type="text" id="image" class="form-control" formControlName="imgPath">
-                                    <label for="image">image</label>
-                                    <span *ngIf="formErrors.imgPath" class="help-block">{{ formErrors.imgPath }}</span>
-                                    <span *ngIf="clientForm.controls.imgPath.pristine" class="help-block">{{pristineMessages.imgPath}}</span>
+                                <div class="form-group form-md-line-input form-md-floating-label" [ngClass]="{'has-error': formErrors.email, 'has-success': !formErrors.email}">
+                                    <input [ngClass]="{'edited':isEdit}" type="text" id="email" class="form-control" formControlName="email">
+                                    <label for="email">email</label>
+                                    <span *ngIf="formErrors.email" class="help-block">{{ formErrors.email }}</span>
+                                    <span *ngIf="clientForm.controls.email.pristine" class="help-block">{{pristineMessages.email}}</span>
                                 </div>
                             </div>
 
@@ -91,9 +93,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group form-md-line-input form-md-floating-label edited has-info">
-                                    <input [ngClass]="{'edited':isEdit}" type="text" id="adresse" class="form-control" autocorrect="off"
-                                        autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-                                        <label for="adresse"></label>
+                                    <input [ngClass]="{'edited':isEdit}" type="text" id="adresse" class="form-control" autocorrect="off" autocapitalize="off"
+                                        spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+                                    <label for="adresse"></label>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +112,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-md-line-input form-md-floating-label has-info">
                                         <input [ngClass]="{'edited':isEdit}" readonly="" type="text" id="zipcode" class="form-control" formControlName="zipcode"
-                                            [value]="autocomplete ? autocomplete.getPlace()?.address_components[6].long_name : ''">
+                                            [value]="getZipcode()">
                                         <label for="zipcode">code postal</label>
                                     </div>
                                 </div>
@@ -118,23 +120,21 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group form-md-line-input form-md-floating-label has-info">
-                                        <input [ngClass]="{'edited':isEdit}" readonly="" type="text" id="ville" class="form-control" formControlName="ville" [value]="autocomplete ? autocomplete.getPlace()?.address_components[2].long_name : ''">
+                                        <input [ngClass]="{'edited':isEdit}" readonly="" type="text" id="ville" class="form-control" formControlName="ville" [value]="getVille()">
                                         <label for="ville">ville</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-md-line-input form-md-floating-label has-info">
-                                        <input [ngClass]="{'edited':isEdit}" readonly="" type="text" id="pays" class="form-control" formControlName="pays" [value]="autocomplete ? autocomplete.getPlace()?.address_components[5].long_name : ''">
+                                        <input [ngClass]="{'edited':isEdit}" readonly="" type="text" id="pays" class="form-control" formControlName="pays" [value]="getPays()">
                                         <label for="pays">pays</label>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <input [hidden]="true" formControlName="latitude" type="text" id="lat" readonly [value]="autocomplete ? autocomplete.getPlace()?.geometry.location.lat() : ''"
-                            />
-                            <input [hidden]="true" formControlName="longitude" type="text" id="lng" readonly [value]="autocomplete ? autocomplete.getPlace()?.geometry.location.lng() : ''"
-                            />
+                            <input [hidden]="true" formControlName="latitude" type="text" id="lat" readonly [value]="getLat()" />
+                            <input [hidden]="true" formControlName="longitude" type="text" id="lng" readonly [value]="getLng()" />
                         </div>
 
 
@@ -180,7 +180,7 @@
 
     </pre>
                 </div>
-                <hr *ngIf="clientForm.value.imgPath"/>
+                <hr *ngIf="clientForm.value.imgPath" />
                 <img style="max-width: 100%" [src]="clientForm.value.imgPath" />
                 <hr/>
                 <sebm-google-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">

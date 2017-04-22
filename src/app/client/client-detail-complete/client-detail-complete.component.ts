@@ -74,7 +74,6 @@ export class ClientDetailCompleteComponent implements OnInit {
     this.clientFbService.delete(client.$key)
       .then(
       (success) => {
-        alert('success');
         this.router.navigate(['/client']);
       });
   }

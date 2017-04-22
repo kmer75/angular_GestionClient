@@ -59,7 +59,7 @@ export class ClientListComponent implements OnInit, OnChanges {
     this.router.navigate(['/client/add']);
   }
 
-  getClients(): Observable<any> {
+  getClients(): Observable<Client[]> {
     let response = this.clientFBService.getClients().share();
     response.delay(500).subscribe(
       (data) => { this.clients = data },

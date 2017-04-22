@@ -30,9 +30,7 @@ export class ClientSearchService {
                 limitToFirst: 3,
             }
         });
-        clients$.subscribe(
-            val => console.log(val)
-        )
+        //clients$.subscribe();
         return clients$;
     }
 }
