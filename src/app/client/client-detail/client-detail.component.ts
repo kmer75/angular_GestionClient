@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import 'rxjs/add/operator/switchMap';
-import { Router } from "@angular/router";
+import { Router, Params } from "@angular/router";
 
 
 @Component({
@@ -51,11 +51,31 @@ export class ClientDetailComponent implements OnInit {
 
   client: Client;
 
-  @Input() clientDetail: Client = null;
+  //@Input() 
+  clientDetail: Client;
 
   ngOnInit() {
     this.gotoDetail(this.clientDetail);
+
+    this.clientDetail = null;
+    
+    this.route.queryParams.subscribe(
+      (params : Params) =>
+      {
+        if(!params['id']) {
+          this.clientDetail = null;
+        }
+        else {
+        var key : string = params['id'];
+        this.clientFbService.getClient(key).subscribe(
+          client => this.clientDetail = client
+        );
+        }
+      } 
+    );
   }
+
+
 
   @Output() eventDeletedClient = new EventEmitter<Client>();
 

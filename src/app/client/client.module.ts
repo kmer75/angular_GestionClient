@@ -15,6 +15,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { ClientGeolocalisationComponent } from './client-geolocalisation/client-geolocalisation.component';
 import { ClientDetailCompleteComponent } from './client-detail-complete/client-detail-complete.component';
+import { ClientAccueilComponent } from './client-accueil/client-accueil.component';
+import { RouterModule } from "@angular/router";
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { ClientDetailCompleteComponent } from './client-detail-complete/client-d
     CommonModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     ReactiveFormsModule,
+    RouterModule,
     FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbsHKzXuELRvYsyTzxpWtDmpe9zOyqQWU',
@@ -35,7 +38,10 @@ import { ClientDetailCompleteComponent } from './client-detail-complete/client-d
     ClientDashboardComponent,
     ClientListComponent,
     ClientDetailComponent,
-    ClientSaveComponent, ClientGeolocalisationComponent, ClientDetailCompleteComponent],
+    ClientSaveComponent, 
+    ClientGeolocalisationComponent, 
+    ClientDetailCompleteComponent, 
+    ClientAccueilComponent],
 
   exports: [ClientComponent]
 })

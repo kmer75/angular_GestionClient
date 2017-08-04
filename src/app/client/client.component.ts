@@ -1,6 +1,7 @@
 import { Animations } from './../shared/animation';
 import { Component, OnInit } from '@angular/core';
 import { Client } from './client';
+import { Router, Route } from "@angular/router";
 
 @Component({
   moduleId: module.id,

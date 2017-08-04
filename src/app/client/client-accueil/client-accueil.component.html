@@ -1,0 +1,17 @@
+<p>
+  client-accueil works!
+</p>
+
+<div [@routeAnimation]>
+
+<!--<div class="row">
+    <div class="col-xs-12 m-heading-1 border-green m-bordered">
+        <h3>jQuery BlockUI</h3>
+        <p> The jQuery BlockUI Plugin lets you simulate synchronous behavior when using AJAX, without locking the browser. For
+            more info please check out
+            <a href="http://jquery.malsup.com/block/" target="_blank">the official documentation</a>. </p>
+    </div>
+</div>-->
+<app-client-list [clientToDelete]="selectedClient"></app-client-list>
+<app-client-detail (eventDeletedClient)="assignDeletedClient($event)"></app-client-detail>
+</div>

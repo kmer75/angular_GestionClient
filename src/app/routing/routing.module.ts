@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './../client/client.component';
+import { ClientAccueilComponent } from "app/client/client-accueil/client-accueil.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     path: 'geolocalisation',
     component: ClientGeolocalisationComponent
   },
+  
   {
     path: '',
     redirectTo: 'client',
@@ -32,17 +34,25 @@ const routes: Routes = [
   {
     path: 'client',
     component: ClientComponent,
-  },
-  {
-    path: 'client/add', component: ClientSaveComponent
-  },
+    children : [
 
-  {
-    path: 'client/edit/:id', component: ClientSaveComponent
+      {
+        path: '', component: ClientAccueilComponent
+      },
+
+      {
+        path: 'add', component: ClientSaveComponent
+      },
+
+      {
+        path: 'edit/:id', component: ClientSaveComponent
+      },
+      {
+        path: 'detail/:id', component: ClientDetailCompleteComponent
+      }
+    ]
   },
-  {
-    path: 'client/detail/:id', component: ClientDetailCompleteComponent
-  }
+  
 ];
  
 @NgModule({

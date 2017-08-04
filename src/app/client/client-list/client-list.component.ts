@@ -1,6 +1,6 @@
 import { ClientFirebaseService } from './../services/client-firebase.service';
 import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { ClientService } from './../services/client.service';
 import {
   Component, OnInit, EventEmitter, Output, Input, OnChanges, trigger,
@@ -50,8 +50,9 @@ export class ClientListComponent implements OnInit, OnChanges {
   onSelect(c: Client) {
     console.log('on select un client parmi ma liste');
     console.log(c);
-    this.selectedClient = c;
-    this.event.emit(c);
+    // this.selectedClient = c;
+    // this.event.emit(c);
+    this.router.navigate(['/client'], { queryParams: { id: c.$key }, skipLocationChange : true });
 
   }
 
@@ -94,18 +95,18 @@ export class ClientListComponent implements OnInit, OnChanges {
   state: boolean = false;
 
   ngOnInit() {
-    this.changeState();
+    //this.changeState();
     console.log('state => ' + this.state);
     var that = this;
     this.getClients().subscribe(
       (success) => {
         setTimeout(function () {
-          that.changeState();
-          console.log('state => ' + this.state)
-        }, 500);
+        }, 200);
       },
       (fail) => alert('fail')
     );
   }
+
+  
 
 }
